@@ -4,7 +4,7 @@ import {Question} from "./types";
 
 const url = 'https://opentdb.com/'
 
-const mock = [
+export const defaultQuestions: Array<Question> = [
     {
         category: 'Science & Nature',
         type: 'boolean',
@@ -97,7 +97,7 @@ const mock = [
         correct_answer: 'True',
         incorrect_answers: ['False']
     }
-]
+].map(item => ({...item, question: decode(item.question), incorrect_answers: item.incorrect_answers.map(answer => decode(answer))}))
 
 export default {
     questions: async (token: string) => {

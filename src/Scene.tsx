@@ -1,7 +1,8 @@
-import React, {useEffect, useMemo, useState} from 'react'
+import React, {useState} from 'react'
 import {Answer, Question} from "./types";
 import {randomQuestion} from "./model";
-import {Button, Text, View} from "react-native";
+import {SafeAreaView, View} from 'react-native'
+import {Button, Text, Title} from 'react-native-paper';
 import QuestionComponent from './Question'
 
 export default ({questions, restart}: {questions: Map<string, Question>, restart: () => void}) => {
@@ -28,10 +29,10 @@ export default ({questions, restart}: {questions: Map<string, Question>, restart
         }
     }
 
-    if (finished) return <View>
-        <Text>Finished</Text>
-        <Button title="Restart" onPress={restart} />
-    </View>
+    if (finished) return <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
+        <Title style={{textAlign: 'center'}}>Finished</Title>
+        <Button onPress={restart}>Restart</Button>
+    </SafeAreaView>
 
     return <QuestionComponent question={question} answer={answer} />
 }

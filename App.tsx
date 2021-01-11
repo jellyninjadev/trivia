@@ -1,24 +1,30 @@
 import React, {useEffect, useState} from 'react'
-import {ActivityIndicator, Button, SafeAreaView, StyleSheet, Text, View} from 'react-native'
-import Api from './src/api'
+import {SafeAreaView, StyleSheet, View} from 'react-native'
+import Api, {defaultQuestions} from './src/api'
+import {Provider} from './src/theme'
 import {Question} from "./src/types"
 import Scene from "./src/Scene"
+import { Title, Text, Paragraph, Button, ActivityIndicator, Colors } from 'react-native-paper'
 
-export default () => {
+const App = () => {
   const [started, setStarted] = useState(false)
-  const [loading, setLoading] = useState(true)
-  const [ready, setReady] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [ready, setReady] = useState(true)
   const [token, setToken] = useState('')
   const [questions, setQuestions] = useState<Map<string, Question>>(new Map)
 
-  useEffect(() => {
-    const bootstrap = async () => {
-      setReady(true)
-      setLoading(false)
-    }
+  // useEffect(() => {
+  //   const bootstrap = async () => {
+  //     setReady(true)
+  //     const newQuestions = defaultQuestions
+  //     const questionMap = newQuestions.reduce((map, question, i) => map.set(i, question), new Map)
+  //     setQuestions(questionMap)
+  //     setLoading(false)
+  //     setStarted(true)
+  //   }
 
-    bootstrap()
-  }, [])
+  //   bootstrap()
+  // }, [])
 
   const start = async () => {
     setLoading(true)
@@ -27,22 +33,21 @@ export default () => {
     const newQuestions = await Api.questions(newToken)
     const questionMap = newQuestions.reduce((map, question, i) => map.set(i, question), new Map)
     setQuestions(questionMap)
-    console.log('starting with questions', questionMap)
     setLoading(false)
     setStarted(true)
   }
 
-  if (!ready) return <View><ActivityIndicator /></View>
+  if (!ready || loading) return <View style={{flex: 1, justifyContent: 'center'}}><ActivityIndicator /></View>
 
-  if (!started) return <SafeAreaView>
-    <Text>Trivia</Text>
-    <Text>A trivia game or competition is one where the competitors are asked questions about interesting but unimportant facts in mane subjects</Text>
-    <Button title="Start quiz" onPress={start} />
+  if (!started) return <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
+    <View style={{paddingHorizontal: 12}}>
+      <Title>Trivia</Title>
+      <Paragraph>A trivia game or competition is one where the competitors are asked questions about interesting but unimportant facts in mane subjects</Paragraph>
+      <Button onPress={start}>Start quiz</Button>
+    </View>
   </SafeAreaView>
 
-  if (loading) return <View><ActivityIndicator /></View>
-
-  return <Scene questions={questions} restart={start} />
+  return <SafeAreaView style={{flex: 1, justifyContent: 'center'}}><Scene questions={questions} restart={start} /></SafeAreaView>
 }
 
 const styles = StyleSheet.create({
@@ -53,3 +58,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default () => <Provider><App /></Provider>
+
+// TODO
+// 1. iPad support
+// 2. Animations
+// 3. Theming and dark mode
+// 4. Style refactor
+// 5. Finish page with statistics
