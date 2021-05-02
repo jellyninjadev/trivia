@@ -13,19 +13,6 @@ const App = () => {
   const [token, setToken] = useState('')
   const [questions, setQuestions] = useState<Map<string, Question>>(new Map)
 
-  // useEffect(() => {
-  //   const bootstrap = async () => {
-  //     setReady(true)
-  //     const newQuestions = defaultQuestions
-  //     const questionMap = newQuestions.reduce((map, question, i) => map.set(i, question), new Map)
-  //     setQuestions(questionMap)
-  //     setLoading(false)
-  //     setStarted(true)
-  //   }
-
-  //   bootstrap()
-  // }, [])
-
   const start = async () => {
     setLoading(true)
     const newToken = await Api.token()
