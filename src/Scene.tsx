@@ -1,11 +1,14 @@
-import React, {useEffect, useState} from 'react'
-import {Answer, Question} from "./types";
-import {randomQuestion} from "./model";
-import {SafeAreaView, View} from 'react-native'
-import {Button, Text, Title} from 'react-native-paper';
+import React, { useState } from 'react'
+import { Answer, Question } from "./types";
+import { randomQuestion } from "./model";
+import { View } from 'react-native'
+import { Button, Title, Paragraph } from 'react-native-paper';
 import QuestionComponent from './Question'
 
-export default ({questions, restart}: {questions: Map<string, Question>, restart: () => void}) => {
+const conj = (num: number, noun: string) => `${num} ${noun}${num > 1 || num === 0 ? 's' : ''}`
+const getAverage = (answers: Map<string, Answer>) => Math.floor(Array.from(answers).reduce((value, [, answer]) => value + answer.seconds, 0) / answers.size)
+
+export default ({ questions, restart }: { questions: Map<string, Question>, restart: () => void }) => {
     const [score, setScore] = useState(0)
     const [start, setStart] = useState(new Date().getTime())
     const [finished, setFinished] = useState(false)
@@ -26,10 +29,16 @@ export default ({questions, restart}: {questions: Map<string, Question>, restart
         }
     }
 
-    if (finished) return <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
-        <Title style={{textAlign: 'center'}}>Finished</Title>
-        <Button onPress={restart}>Restart</Button>
-    </SafeAreaView>
+    if (finished) {
+        const average = getAverage(answers)
+
+        return <View style={{ paddingHorizontal: 12, justifyContent: 'center' }}>
+            <Title style={{ textAlign: 'center' }}>Finished</Title>
+            <Paragraph>Average time: {conj(average, 'second')}</Paragraph>
+            <Paragraph>Score: {conj(score, 'point')}</Paragraph>
+            <Button onPress={restart}>Restart</Button>
+        </View>
+    }
 
     return <QuestionComponent question={question} answer={answer} />
 }

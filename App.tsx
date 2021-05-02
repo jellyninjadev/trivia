@@ -37,15 +37,6 @@ const App = () => {
   return <SafeAreaView style={{flex: 1, justifyContent: 'center'}}><Scene questions={questions} restart={start} /></SafeAreaView>
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
 export default () => <Provider><App /></Provider>
 
 // TODO
@@ -53,5 +44,4 @@ export default () => <Provider><App /></Provider>
 // 2. Animations
 // 3. Theming and dark mode
 // 4. Style refactor
-// 5. Finish page with statistics
 // 6. Start over navigation top right button
