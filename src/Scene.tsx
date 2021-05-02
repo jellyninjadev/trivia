@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Answer, Question} from "./types";
 import {randomQuestion} from "./model";
 import {SafeAreaView, View} from 'react-native'
@@ -18,14 +18,11 @@ export default ({questions, restart}: {questions: Map<string, Question>, restart
             setFinished(true)
         } else {
             const [index, q] = question
-            if (q.correct_answer === answer) {
-                setScore(score + 10)
-                const seconds = new Date().getTime() - start
-                answers.set(index, {answered: true, seconds})
-                setAnswers(answers)
-                setStart(new Date().getTime())
-            }
-
+            setScore(score + 10)
+            const seconds = new Date().getTime() - start
+            answers.set(index, { answered: q.correct_answer === answer, seconds })
+            setAnswers(answers)
+            setStart(new Date().getTime())
         }
     }
 

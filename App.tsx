@@ -41,7 +41,7 @@ const App = () => {
 
   if (!started) return <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
     <View style={{paddingHorizontal: 12}}>
-      <Title>Trivia</Title>
+      <Title style={{fontSize: 46, lineHeight: 50}}>Trivia</Title>
       <Paragraph>A trivia game or competition is one where the competitors are asked questions about interesting but unimportant facts in mane subjects</Paragraph>
       <Button onPress={start}>Start quiz</Button>
     </View>
@@ -67,3 +67,4 @@ export default () => <Provider><App /></Provider>
 // 3. Theming and dark mode
 // 4. Style refactor
 // 5. Finish page with statistics
+// 6. Start over navigation top right button
