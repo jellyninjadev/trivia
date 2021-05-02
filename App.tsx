@@ -1,15 +1,13 @@
-import React, {useEffect, useState} from 'react'
-import {SafeAreaView, StyleSheet, View} from 'react-native'
-import Api, {defaultQuestions} from './src/api'
-import {Provider} from './src/theme'
+import React, {useState} from 'react'
+import {SafeAreaView, View} from 'react-native'
+import Api from './src/api'
 import {Question} from "./src/types"
 import Scene from "./src/Scene"
-import { Title, Text, Paragraph, Button, ActivityIndicator, Colors } from 'react-native-paper'
+import { Title, Paragraph, Button, ActivityIndicator } from 'react-native-paper'
 
-const App = () => {
+export default () => {
   const [started, setStarted] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [ready, setReady] = useState(true)
   const [token, setToken] = useState('')
   const [questions, setQuestions] = useState<Map<string, Question>>(new Map)
 
@@ -24,7 +22,7 @@ const App = () => {
     setStarted(true)
   }
 
-  if (!ready || loading) return <View style={{flex: 1, justifyContent: 'center'}}><ActivityIndicator /></View>
+  if (loading) return <View style={{flex: 1, justifyContent: 'center'}}><ActivityIndicator /></View>
 
   if (!started) return <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
     <View style={{paddingHorizontal: 12}}>
@@ -37,11 +35,3 @@ const App = () => {
   return <SafeAreaView style={{flex: 1, justifyContent: 'center'}}><Scene questions={questions} restart={start} /></SafeAreaView>
 }
 
-export default () => <Provider><App /></Provider>
-
-// TODO
-// 1. iPad support
-// 2. Animations
-// 3. Theming and dark mode
-// 4. Style refactor
-// 6. Start over navigation top right button
