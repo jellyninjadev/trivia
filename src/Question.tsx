@@ -16,8 +16,8 @@ export default ({question, answer}: {question: [string, Question], answer: (i: s
             </View>
         </View>
         <View style={{paddingVertical: 4, maxHeight: 224}}>
-        <FlatList 
-            data={items} 
+        <FlatList
+            data={items}
             renderItem={
                 ({item}) => <View style={{paddingVertical: 4}}><Button mode="contained" compact={true} onPress={() => answer(item.title)}>{item.title}</Button></View>
             }/>
