@@ -19,7 +19,15 @@ export default ({question, answer}: {question: [string, Question], answer: (i: s
         <FlatList 
             data={items} 
             renderItem={
-                ({item}) => <View style={{paddingVertical: 4}}><Button mode="contained" compact={true} onPress={() => answer(item.title)}>{item.title}</Button></View>
+							({item, index}) => <View style={{paddingVertical: 4}}>
+								<Button 
+								accessibilityLabel={`Answer-${index}`}
+								mode="contained" 
+								compact={true} 
+							onPress={() => answer(item.title)}>
+							{item.title}
+							</Button>
+								</View>
             }/>
         </View>
         </View>
