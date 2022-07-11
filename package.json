@@ -5,8 +5,7 @@
         "ios": "expo start --ios",
         "web": "expo start --web",
         "test": "jest",
-        "e2e": "detox test",
-        "postinstall": "patch-package"
+        "e2e": "detox test"
     },
     "jest": {
         "preset": "jest-expo",
