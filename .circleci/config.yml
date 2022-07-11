@@ -3,7 +3,7 @@ version: 2.1
 executors:
   mac:
     macos:
-      xcode: '13.0.0'
+      xcode: '14.0.0'
 
 commands:
   restore:
