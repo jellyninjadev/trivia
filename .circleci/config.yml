@@ -59,9 +59,6 @@ workflows:
   main:
     jobs:
       - install
-      - test:
-          requires:
-            - install
       - e2e:
           requires:
             - install
