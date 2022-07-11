@@ -1,9 +1,8 @@
 version: 2.1
 
 executors:
-  mac:
-    macos:
-      xcode: '14.0.0'
+  macos:
+    xcode: '14.0.0'
 
 commands:
   restore:
