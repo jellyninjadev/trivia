@@ -41,11 +41,10 @@ jobs:
     executor: mac
     steps:
       - restore
+      - run: ./scripts/e2e.sh
       - run:
           name: E2E
-          command: npm run wdio
-          environment:
-            JEST_JUNIT_OUTPUT_DIR: ./reports/junit
+          command: npm run e2e -- -c ios
       - store_test_results:
           path: ./reports/junit
       - store_artifacts:
