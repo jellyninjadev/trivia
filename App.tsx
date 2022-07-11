@@ -28,7 +28,7 @@ export default () => {
     <View style={{paddingHorizontal: 12}}>
       <Title style={{fontSize: 46, lineHeight: 50}}>Trivia</Title>
       <Paragraph>A trivia game or competition is one where the competitors are asked questions about interesting but unimportant facts in mane subjects</Paragraph>
-      <Button onPress={start} accessibilityLabel="Start">Start quiz</Button>
+      <Button onPress={start} accessibilityLabel="Start" testID="StartButton">Start quiz</Button>
     </View>
   </SafeAreaView>
 

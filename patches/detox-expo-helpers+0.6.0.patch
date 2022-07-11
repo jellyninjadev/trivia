@@ -1,0 +1,49 @@
+
+diff --git a/node_modules/detox-expo-helpers/index.js b/node_modules/detox-expo-helpers/index.js
+index 864493b..3147a55 100644
+--- a/node_modules/detox-expo-helpers/index.js
++++ b/node_modules/detox-expo-helpers/index.js
+@@ -45,7 +45,16 @@ function resetEnvDyldVar(oldEnvVar) {
+   }
+ }
+ 
+-const reloadApp = async (params) => {
++let initialized = false;
++let detoxVersion;
++let oldEnvVar;
++const init = () => {
++  if (initialized) {
++    return;
++  }
++
++  initialized = true;
++
+   if (!fs.existsSync(expoDetoxHookPackageJsonPath)) {
+     throw new Error("expo-detox-hook is not installed in this directory. You should declare it in package.json and run `npm install`");
+   }
+@@ -56,12 +65,16 @@ const reloadApp = async (params) => {
+     throw new Error ("expo-detox-hook is not installed in your osx Library. Run `npm install -g expo-detox-cli && expotox clean-framework-cache && expotox build-framework-cache` to fix this.");
+   }
+ 
+-  const detoxVersion = getDetoxVersion();
+-  const oldEnvVar = process.env.SIMCTL_CHILD_DYLD_INSERT_LIBRARIES;
++  detoxVersion = getDetoxVersion();
++  oldEnvVar = process.env.SIMCTL_CHILD_DYLD_INSERT_LIBRARIES;
+ 
+   if (semver.gte(detoxVersion, '9.0.6')) {
+     process.env.SIMCTL_CHILD_DYLD_INSERT_LIBRARIES = expoDetoxHookFrameworkPath;
+   }
++}
++
++const reloadApp = async (params) => {
++  init();
+ 
+   const formattedBlacklistArg = await blacklistCmdlineFormat(params && params.urlBlacklist);
+   const url = await getAppUrl();
+@@ -121,5 +134,6 @@ module.exports = {
+   getAppUrl,
+   getAppHttpUrl,
+   blacklistLiveReloadUrl,
++  init,
+   reloadApp,
+ };
