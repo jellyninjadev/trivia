@@ -81,7 +81,7 @@ export const config: Options.Testrunner = {
     //
     capabilities: [{
     		platformName: 'iOS',
-        platformVersion: '15.5',
+        platformVersion: '15.0',
         deviceName: 'iPhone SE (3rd generation)',
         autoAcceptAlerts: true
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
