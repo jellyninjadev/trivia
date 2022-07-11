@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
-import {SafeAreaView, View} from 'react-native'
+import React, { useState } from 'react'
+import { SafeAreaView, View } from 'react-native'
 import Api from './src/api'
-import {Question} from "./src/types"
-import Scene from "./src/Scene"
+import { Question } from "./src/types"
+import Scene from './src/Scene'
 import { Title, Paragraph, Button, ActivityIndicator } from 'react-native-paper'
 
 export default () => {
@@ -28,7 +28,7 @@ export default () => {
     <View style={{paddingHorizontal: 12}}>
       <Title style={{fontSize: 46, lineHeight: 50}}>Trivia</Title>
       <Paragraph>A trivia game or competition is one where the competitors are asked questions about interesting but unimportant facts in mane subjects</Paragraph>
-      <Button onPress={start}>Start quiz</Button>
+      <Button onPress={start} accessibilityLabel="Start" testID="StartButton">Start quiz</Button>
     </View>
   </SafeAreaView>
 

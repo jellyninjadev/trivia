@@ -1,0 +1,65 @@
+version: 2.1
+
+executors:
+  mac:
+    macos:
+      xcode: '13.4.1'
+
+commands:
+  restore:
+    steps:
+      - checkout
+      - restore_cache:
+          key: node_modules-{{ checksum "package-lock.json" }}
+
+jobs:
+  install:
+    executor: mac
+    steps:
+      - checkout
+      - run: npm i
+      - save_cache:
+          key: node_modules-{{checksum "package-lock.json" }}
+          paths:
+            - node_modules
+
+  test:
+    executor: mac
+    steps:
+      - restore
+      - run:
+          name: Test
+          command: npm test -- --ci --runInBand
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: ./reports/junit
+      - store_test_results:
+          path: ./reports/junit
+      - store_artifacts:
+          path: coverage
+
+  e2e:
+    executor: mac
+    steps:
+      - restore
+      - run: ~/project/scripts/download-expo.sh
+      - run: npm i -g detox-cli
+      - run: brew tap wix/brew
+      - run: brew install applesimutils
+      - run: detox clean-framework-cache && detox build-framework-cache
+      - run: ./node_modules/expo-detox-hook/scripts/build_framework.ios.sh
+      - run:
+          name: E2E
+          command: npm run e2e -- -c ios -l verbose
+      - store_test_results:
+          path: ./reports/junit
+      - store_artifacts:
+          path: coverage
+
+workflows:
+  main:
+    jobs:
+      - install
+      - e2e:
+          requires:
+            - install
+

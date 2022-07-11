@@ -13,3 +13,7 @@ web-build/
 
 # macOS
 .DS_Store
+
+# e2e expo apps
+Exponent.app
+Exponent.apk

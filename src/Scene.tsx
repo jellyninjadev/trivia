@@ -36,7 +36,7 @@ export default ({ questions, restart }: { questions: Map<string, Question>, rest
             <Title style={{ textAlign: 'center' }}>Finished</Title>
             <Paragraph>Average time: {conj(average, 'second')}</Paragraph>
             <Paragraph>Score: {conj(score, 'point')}</Paragraph>
-            <Button onPress={restart}>Restart</Button>
+            <Button onPress={restart} testID="Restart">Restart</Button>
         </View>
     }
 
