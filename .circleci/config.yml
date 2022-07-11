@@ -42,14 +42,13 @@ jobs:
     steps:
       - restore
       - run: ~/project/scripts/download-expo.sh
-      - run: npm i -g expo-cli
       - run: npm i -g detox-cli
       - run: brew tap wix/brew
       - run: brew install applesimutils
       - run: detox clean-framework-cache && detox build-framework-cache
       - run:
           name: E2E
-          command: npm run start & npm run e2e -- -c ios
+          command: npm run e2e -- -c ios
       - store_test_results:
           path: ./reports/junit
       - store_artifacts:

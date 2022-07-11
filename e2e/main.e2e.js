@@ -6,7 +6,7 @@ function sleep(ms) {
 
 describe('Example', () => {
   beforeEach(async () => {
-		await reloadApp();
+		await reloadApp({url: 'exp://exp.host/@senhorbardell/trivia?release-channel=detox'});
 		await waitFor(element(by.id('StartButton'))).toBeVisible().withTimeout(5000);
   });
 
