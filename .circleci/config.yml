@@ -42,10 +42,11 @@ jobs:
     steps:
       - restore
       - run: ~/project/scripts/download-expo.sh
-      - run: npm i -g detox-cli expo-detox-cli
+      - run: npm i -g detox-cli
       - run: brew tap wix/brew
       - run: brew install applesimutils
       - run: detox clean-framework-cache && detox build-framework-cache
+      - run: ./node_modules/expo-detox-hook/scripts/build_framework.ios.sh
       - run:
           name: E2E
           command: npm run e2e -- -c ios -l verbose
