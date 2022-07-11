@@ -58,7 +58,7 @@ workflows:
       - test:
           requires:
             - install
-      -e2e:
+      - e2e:
           requires:
             - install
 
