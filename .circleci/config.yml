@@ -57,6 +57,18 @@ jobs:
       - store_artifacts:
           path: ./reports/records
 
+  expo-publish-release-channel:
+    executer: mac
+    steps:
+      - restore
+      - run: npx expo-cli publish --non-interactive --max-workers 1 release-channel $(echo $CIRCLE_BRANCH | tr A-Z a-z)
+
+  expo-publish:
+    executer: mac
+    steps:
+      - restore
+      - run: npx expo-cli publish --non-interactive --max-workers 1
+
 workflows:
   main:
     jobs:
@@ -64,4 +76,20 @@ workflows:
       - e2e:
           requires:
             - install
+      - publish:
+          requires:
+            - install
+            - e2e
+          filters:
+            branches:
+              only: master
+      - publish-release-channel:
+          requires:
+            - install
+            - e2e
+          filters:
+            branches:
+              ignore:
+                - master
+
 
