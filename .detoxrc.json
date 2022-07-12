@@ -3,10 +3,15 @@
   "runnerConfig": "e2e/config.json",
   "skipLegacyWorkersInjection": true,
   "apps": {
-    "ios": {
+    "ios:managed": {
       "type": "ios.app",
       "binaryPath": "e2e/Exponent.app"
     },
+		"ios": {
+			"type": "ios.app",
+			"binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/trivia.app",
+			"build": "xcodebuild -workspace ios/trivia.xcworkspace -scheme trivia -sdk iphonesimulator -derivedDataPath ios/build"
+		},
     "android": {
       "type": "android.apk",
       "binaryPath": "e2e/Exponent.apk"
