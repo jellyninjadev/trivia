@@ -50,11 +50,13 @@ jobs:
       - run: detox build -c ios
       - run:
           name: E2E
-          command: npm run e2e -- -c ios -l verbose
+          command: npm run e2e -- -c ios --record-videos all --artifacts-location ./reports/records
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: ./reports/junit
       - store_test_results:
           path: ./reports/junit
       - store_artifacts:
-          path: coverage
+          path: ./reports/records
 
 workflows:
   main:

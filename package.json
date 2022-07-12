@@ -47,6 +47,7 @@
     "expo-detox-hook": "^1.0.10",
     "husky": "^4.3.7",
     "jest-expo": "^45.0.0",
+    "jest-junit": "^14.0.0",
     "prettier": "^2.2.1",
     "pretty-quick": "^3.1.0",
     "ts-node": "^10.8.2",

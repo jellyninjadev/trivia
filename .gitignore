@@ -17,3 +17,9 @@ web-build/
 # e2e expo apps
 Exponent.app
 Exponent.apk
+
+.expo/
+web-build/
+dist/
+ios
+android
