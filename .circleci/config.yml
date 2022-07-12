@@ -57,14 +57,14 @@ jobs:
       - store_artifacts:
           path: ./reports/records
 
-  expo-publish-release-channel:
-    executer: mac
+  publish-release-channel:
+    executor: mac
     steps:
       - restore
       - run: npx expo-cli publish --non-interactive --max-workers 1 --release-channel $(echo $CIRCLE_BRANCH | tr A-Z a-z)
 
-  expo-publish:
-    executer: mac
+  publish:
+    executor: mac
     steps:
       - restore
       - run: npx expo-cli publish --non-interactive --max-workers 1
