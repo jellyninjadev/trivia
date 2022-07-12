@@ -61,7 +61,7 @@ jobs:
     executer: mac
     steps:
       - restore
-      - run: npx expo-cli publish --non-interactive --max-workers 1 release-channel $(echo $CIRCLE_BRANCH | tr A-Z a-z)
+      - run: npx expo-cli publish --non-interactive --max-workers 1 --release-channel $(echo $CIRCLE_BRANCH | tr A-Z a-z)
 
   expo-publish:
     executer: mac
