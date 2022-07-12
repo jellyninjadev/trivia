@@ -46,7 +46,6 @@ jobs:
       - run: brew tap wix/brew
       - run: brew install applesimutils
       - run: detox clean-framework-cache && detox build-framework-cache
-      // - run: ./node_modules/expo-detox-hook/scripts/build_framework.ios.sh
       - run: detox build -c ios
       - run:
           name: E2E
