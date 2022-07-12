@@ -41,19 +41,33 @@ jobs:
     executor: mac
     steps:
       - restore
-      - run: ~/project/scripts/download-expo.sh
-      - run: npm i -g detox-cli
+      - run: npm i -g detox-cli expo-cli
       - run: brew tap wix/brew
       - run: brew install applesimutils
       - run: detox clean-framework-cache && detox build-framework-cache
-      - run: ./node_modules/expo-detox-hook/scripts/build_framework.ios.sh
+      - run: expo prebuild -p ios
+      - run: detox build -c ios
       - run:
           name: E2E
-          command: npm run e2e -- -c ios -l verbose
+          command: npm run e2e -- -c ios --record-videos all --artifacts-location ./reports/records
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: ./reports/junit
       - store_test_results:
           path: ./reports/junit
       - store_artifacts:
-          path: coverage
+          path: ./reports/records
+
+  publish-release-channel:
+    executor: mac
+    steps:
+      - restore
+      - run: npx expo-cli publish --non-interactive --max-workers 1 --release-channel $(echo $CIRCLE_BRANCH | tr A-Z a-z)
+
+  publish:
+    executor: mac
+    steps:
+      - restore
+      - run: npx expo-cli publish --non-interactive --max-workers 1
 
 workflows:
   main:
@@ -62,4 +76,20 @@ workflows:
       - e2e:
           requires:
             - install
+      - publish:
+          requires:
+            - install
+            - e2e
+          filters:
+            branches:
+              only: master
+      - publish-release-channel:
+          requires:
+            - install
+            - e2e
+          filters:
+            branches:
+              ignore:
+                - master
+
 
