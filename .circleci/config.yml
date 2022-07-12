@@ -41,7 +41,6 @@ jobs:
     executor: mac
     steps:
       - restore
-      - run: ~/project/scripts/download-expo.sh
       - run: npm i -g detox-cli expo-cli
       - run: brew tap wix/brew
       - run: brew install applesimutils
