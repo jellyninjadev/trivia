@@ -29,7 +29,7 @@ jobs:
       - restore
       - run:
           name: Test
-          command: npm test -- --ci --runInBand
+          command: npm test -- --ci --runInBand --reporters=default --reporters=jest-junit --coverage
           environment:
             JEST_JUNIT_OUTPUT_DIR: ./reports/junit
       - store_test_results:
@@ -73,6 +73,9 @@ workflows:
   main:
     jobs:
       - install
+      - test:
+          requires:
+            - install
       - e2e:
           requires:
             - install
@@ -80,6 +83,7 @@ workflows:
           requires:
             - install
             - e2e
+            - test
           filters:
             branches:
               only: master
@@ -87,6 +91,7 @@ workflows:
           requires:
             - install
             - e2e
+            - test
           filters:
             branches:
               ignore:
