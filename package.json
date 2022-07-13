@@ -1,53 +1,60 @@
 {
-  "scripts": {
-    "start": "expo start --dev-client",
-    "android": "expo run:android",
-    "ios": "expo run:ios",
-    "web": "expo start --web",
-    "test": "jest",
-    "e2e": "detox test"
-  },
-  "jest": {
-		"preset": "jest-expo",
-		"transformIgnorePatterns": [
-			"node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
-		]
-  },
-  "dependencies": {
-    "expo": "^45.0.0",
-    "expo-splash-screen": "~0.15.1",
-    "expo-status-bar": "~1.3.0",
-    "expo-updates": "^0.13.3",
-    "he": "^1.2.0",
-    "qs": "^6.9.4",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-native": "0.68.2",
-    "react-native-paper": "^4.8.0",
-    "react-native-web": "0.17.7"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.12.9",
-    "@config-plugins/detox": "^2.0.0",
-    "@types/jest": "^26.0.23",
-    "@types/react": "~17.0.21",
-    "@types/react-dom": "~17.0.11",
-    "@types/react-native": "~0.67.6",
-    "@types/react-test-renderer": "16.9.0",
-    "@wdio/appium-service": "^7.20.3",
-    "detox": "^19.7.1",
-    "detox-expo-helpers": "github:senhorbardell/detox-expo-helpers",
-    "eslint": "^7.17.0",
-    "expo-detox-hook": "^1.0.10",
-    "husky": "^4.3.7",
-    "jest-expo": "^45.0.0",
-    "jest-junit": "^14.0.0",
-    "prettier": "^2.2.1",
-    "pretty-quick": "^3.1.0",
-    "ts-node": "^10.8.2",
-    "typescript": "^4.7.4"
-  },
-  "private": true,
-  "name": "trivia",
-  "version": "1.0.0"
+    "scripts": {
+        "start": "expo start --dev-client",
+        "android": "expo run:android",
+        "ios": "expo run:ios",
+        "web": "expo start --web",
+        "test": "jest",
+        "e2e": "detox test",
+        "wdio": "wdio run test/wdio.conf.ts"
+    },
+    "jest": {
+        "preset": "jest-expo",
+        "transformIgnorePatterns": [
+            "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
+        ]
+    },
+    "dependencies": {
+        "expo": "^45.0.0",
+        "expo-splash-screen": "~0.15.1",
+        "expo-status-bar": "~1.3.0",
+        "expo-updates": "^0.13.3",
+        "he": "^1.2.0",
+        "qs": "^6.9.4",
+        "react": "17.0.2",
+        "react-dom": "17.0.2",
+        "react-native": "0.68.2",
+        "react-native-paper": "^4.8.0",
+        "react-native-web": "0.17.7"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.12.9",
+        "@config-plugins/detox": "^2.0.0",
+        "@types/jest": "^26.0.23",
+        "@types/react": "~17.0.21",
+        "@types/react-dom": "~17.0.11",
+        "@types/react-native": "~0.67.6",
+        "@types/react-test-renderer": "16.9.0",
+        "@wdio/appium-service": "^7.20.3",
+        "@wdio/cli": "^7.20.5",
+        "@wdio/junit-reporter": "^7.20.3",
+        "@wdio/local-runner": "^7.20.5",
+        "@wdio/mocha-framework": "^7.20.3",
+        "@wdio/spec-reporter": "^7.20.3",
+        "appium": "^1.22.3",
+        "detox": "^19.7.1",
+        "detox-expo-helpers": "github:senhorbardell/detox-expo-helpers",
+        "eslint": "^7.17.0",
+        "expo-detox-hook": "^1.0.10",
+        "husky": "^4.3.7",
+        "jest-expo": "^45.0.0",
+        "jest-junit": "^14.0.0",
+        "prettier": "^2.2.1",
+        "pretty-quick": "^3.1.0",
+        "ts-node": "^10.8.2",
+        "typescript": "^4.7.4"
+    },
+    "private": true,
+    "name": "trivia",
+    "version": "1.0.0"
 }
